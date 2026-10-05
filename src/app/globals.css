@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lime: #D72323;
+  --color-ink: #303841;
+  --color-cream: #EEEEEE;
+  --color-sand: #3A4750;
+  --color-primary: #D72323;
+  --color-secondary: #3A4750;
+  --color-accent: #D72323;
+  --color-surface: #EEEEEE;
+  --font-sans: var(--font-sans), "Inter", system-ui, sans-serif;
+  --font-display: var(--font-display), "Inter", system-ui, sans-serif;
+  --font-outline: var(--font-outline), "Inter", system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { background: #EEEEEE; color: #303841; font-family: var(--font-sans); }
+
+.text-stroke { -webkit-text-stroke: 1px #D72323; color: transparent; }
+.marquee-track { animation: marquee 22s linear infinite; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.grid-dots { background-image: radial-gradient(#3A4750 1.2px, transparent 1.2px); background-size: 14px 14px; }
+.animate-orbit { animation: orbit-spin linear infinite; }
+@keyframes orbit-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
