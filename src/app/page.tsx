@@ -41,6 +41,7 @@ type WorkItem = {
   kpis: Kpi[];
   gallery: string[];
   objetivo?: string;
+  listFeatures?: boolean;
   imgFit?: "cover" | "contain";
 };
 
@@ -50,17 +51,18 @@ const works: (WorkItem & { span: string; height: string })[] = [
     image: "/img/descomplica/to-do.PNG",
     short: "IA que tira você do não sei por onde começar.",
     tags: "#TypeScript #IA",
-    details: "Suíte de 5 ferramentas com IA criada para quem convive com disfunção executiva e vive travando na hora de começar. A proposta é simples e poderosa: você despeja um desabafo em texto livre e o app devolve um plano organizado, com cada tarefa quebrada em passos pequenos e tempo estimado de verdade. Tem ainda análise de dilemas com prós e contras e um reescritor que ajusta qualquer texto em 9 tons profissionais. Tudo roda no navegador com visual calmo em tons de papel, feito para não sobrecarregar quem já está sobrecarregado. Projeto acadêmico da FATEC.",
+    details: "Descomplica IA é uma suíte de 5 ferramentas com IA que organiza a bagunça de quem sabe o que precisa fazer, mas trava na hora de começar. Ela foi pensada para quem adia tarefa grande, subestima prazo ou congela na hora de escrever um e-mail importante. O problema que resolve é direto: intenção sem plano vira adiamento, e aqui um desabafo em texto livre já sai como lista organizada, com passos pequenos e tempo estimado de cada etapa. Tem ainda análise de dilemas com prós e contras, cálculo de prazo e um reescritor que ajusta qualquer texto em 9 tons profissionais. Tudo roda no navegador, numa interface calma e sem ruído, feita para não sobrecarregar quem já está sobrecarregado.",
     tools: ["React 19", "TypeScript", "Vite 6", "Tailwind CSS", "Framer Motion", "Groq SDK"], link: "https://github.com/leandro-25/Descomplica_IA",
     repo: "https://github.com/leandro-25/Descomplica_IA",
     layout: "jornada",
     what: "Um kit de 5 ferramentas com IA para quem trava na hora de começar: transforma tarefa grande em passo pequeno, desabafo em lista organizada e dúvida em decisão tomada.",
-    does: ["Magic To-Do: quebra qualquer tarefa grande em subtarefas com nível de detalhe ajustável de 1 a 5, cada etapa já com estimativa de tempo para acabar com a sensação de elefante na sala", "Compiler: pega um desabafo jogado em texto livre e extrai dali uma lista organizada de tarefas, que segue direto para o Magic To-Do", "Estimator: calcula prazos generosos e realistas somando as subtarefas mais um imposto de transição de 15 a 20%, para o plano caber na vida real", "Consultant: analisa qualquer dilema devolvendo prós, contras e uma conclusão pragmática e acolhedora, com outras perspectivas", "Formalizer: reescreve textos em 9 tons, do profissional ao e-mail formal, sem markdown nem emojis, pronto para enviar", "Fluxo integrado: as ferramentas conversam entre si, do painel ao plano final sem retrabalho"],
-    why: "Escolhi esse tema porque antes de qualquer código, dado ou deploy, existe uma pessoa tentando sair do lugar. Organizar a própria cabeça é o primeiro gargalo de qualquer projeto, inclusive dos meus. Se a IA pode destravar gente, ela já valeu cada linha.",
+    does: ["Magic To-Do — quebra qualquer tarefa grande em subtarefas, com nível de detalhe de 1 a 5 e tempo estimado por etapa", "Compiler — extrai uma lista organizada de um desabafo em texto livre e manda direto para o Magic To-Do", "Estimator — calcula prazos realistas somando as subtarefas mais um imposto de transição de 15 a 20%", "Consultant — analisa qualquer dilema entregando prós, contras e uma conclusão prática", "Formalizer — reescreve o texto em 9 tons profissionais, sem markdown nem emoji, pronto para enviar", "Fluxo integrado — as 5 ferramentas conversam entre si, do desabafo ao plano final sem retrabalho"],
+    why: "Porque antes de qualquer código existe uma pessoa tentando sair do lugar. Organizar a própria cabeça é o primeiro gargalo de qualquer projeto, inclusive dos meus. Se a IA pode destravar gente, ela já valeu cada linha.",
     kpis: [{ value: "5", label: "ferramentas integradas" }, { value: "9", label: "tons de reescrita" }, { value: "6", label: "modelos de IA com fallback" }],
     gallery: ["/img/descomplica/compiler.PNG", "/img/descomplica/estimator.PNG", "/img/descomplica/consltant.PNG", "/img/descomplica/formalizer.PNG"],
     imgFit: "contain",
-    objetivo: "Dar tração a quem tem disfunção executiva: transformar intenção em ação com plano claro, tempo honesto e comunicação sem atrito. Cada ferramenta ataca uma trava real: não saber por onde começar, subestimar prazos, decidir sozinho e travar na hora de escrever profissionalmente.",
+    listFeatures: true,
+    objetivo: "Transformar intenção em ação com plano claro, tempo honesto e comunicação sem atrito. Cada ferramenta ataca um travamento real: não saber por onde começar, subestimar prazo, decidir sozinho e travar na hora de escrever. O ponto é tirar a tarefa da cabeça e devolver um caminho que cabe na rotina de quem está usando.",
     span: "col-span-4", height: "h-[200px]",
   },
   {
@@ -414,11 +416,28 @@ export default function Home() {
                     {open.does.length > 0 && (
                       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.9, ease: [0.16, 1, 0.3, 1] }} className="mt-8">
                         <SectionLabel delay={1.1}>☑ Funcionalidades</SectionLabel>
-                        <p className="mt-4 text-[17px] font-medium leading-[2] text-[#303841]/80">
-                          {open.does.map((d, i) => (
-                            <span key={d}>{i > 0 && <span className="mx-3 text-[#3A4750]">✦</span>}{d}</span>
-                          ))}
-                        </p>
+                        {open.listFeatures ? (
+                          <ul className="mt-5 space-y-3.5 text-left">
+                            {open.does.map((d) => {
+                              const [head, ...rest] = d.split(" — ");
+                              return (
+                                <li key={d} className="flex gap-3.5 text-[16px] font-medium leading-[1.7] text-[#303841]/80">
+                                  <span className="mt-[7px] h-[7px] w-[7px] shrink-0 rounded-full bg-[#D72323]" />
+                                  <span>
+                                    <span className="font-black text-[#303841]">{head}</span>
+                                    {rest.length > 0 && <> — {rest.join(" — ")}</>}
+                                  </span>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        ) : (
+                          <p className="mt-4 text-[17px] font-medium leading-[2] text-[#303841]/80">
+                            {open.does.map((d, i) => (
+                              <span key={d}>{i > 0 && <span className="mx-3 text-[#3A4750]">✦</span>}{d}</span>
+                            ))}
+                          </p>
+                        )}
                       </motion.div>
                     )}
                     <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 1, ease: [0.16, 1, 0.3, 1] }} className="mt-8">
