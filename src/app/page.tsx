@@ -72,7 +72,7 @@ const works: (WorkItem & { span: string; height: string })[] = [
     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=60",
     short: "Análise de dados do mercado financeiro.",
     tags: "#Finanças #DataScience",
-    details: "GrowGuru é um aplicativo de análise de dados do mercado financeiro que organiza a carteira, registra compras e vendas e testa estratégias com 5 anos de dados reais da B3. O projeto vai além da análise de dados em Python: ele tem integrado machine learning, redes neurais e IA que trabalham sobre a mesma base para encontrar padrões, filtrar ruído e apoiar a decisão de investimento. O coração é um pipeline ETL que consome dados reais da bolsa, trata tudo com Pandas e NumPy e carrega num banco relacional, alimentando backtest, ranking de ativos e o agente de IA. Com essa base, 14 estratégias foram comparadas contra a história: a melhor rendeu 197% em 5 anos, contra 50% do IBOV no mesmo período. É um app mobile onde a carteira, a rentabilidade por ativo e a leitura das notícias ficam na palma da mão.",
+    details: "GrowGuru é um aplicativo de análise de dados do mercado financeiro que organiza a carteira, registra compras e vendas e testa estratégias com 5 anos de dados reais da B3. O projeto vai além da análise de dados em Python: ele tem integrado machine learning, redes neurais e IA que trabalham sobre a mesma base para encontrar padrões, filtrar ruído e apoiar a decisão de investimento. O coração é um pipeline ETL que consome dados reais da bolsa, trata tudo com Pandas e NumPy e carrega num banco relacional, alimentando backtest, ranking de ativos e o agente de IA. Com essa base, 14 estratégias foram comparadas contra a história: a melhor rendeu 197% em 5 anos, contra 50% do IBOV no mesmo período. É um app mobile onde a carteira, a rentabilidade por ativo e a leitura das notícias ficam na palma da mão. Toda semana ele entrega um ranking de 8 a 10 ações para manter, comprar ou vender, sobre 412 ativos da B3 com 5 anos de histórico, sempre como site de informação, sem conexão com corretora.",
     tools: ["Ionic", "Vue.js", "Node.js", "Supabase", "Python", "Pandas", "Groq", "LLMs"], link: "https://growguru.netlify.app/",
     repo: "https://github.com/leandro-25/GROWGURU",
     objetivo: "Provar que decisão de investimento pode nascer de dados, não de palpite: traduzir o mercado em estratégias que qualquer pessoa entende e levar essa inteligência para o bolso de quem investe. Para isso, o projeto responde a três perguntas que todo investidor tem — onde estou, como estou performando e qual estratégia funciona de verdade. O caminho vai do dado bruto da B3 até a tela da pessoa: pipeline ETL em Python, análise com machine learning e redes neurais, backtest das estratégias e, por fim, a carteira comparada com o índice. O desfecho desejado é que qualquer um consiga testar uma estratégia antes de colocar dinheiro em jogo, em vez de decidir na intuição.",
@@ -489,6 +489,11 @@ export default function Home() {
                             Documentação
                           </Button>
                         </a>
+                        {!open.link.includes("github") && (
+                          <a href={open.link} target="_blank" rel="noopener noreferrer" className="flex w-full items-center gap-1.5 self-center text-[13px] font-bold text-[#303841]/60 underline decoration-[#D72323]/40 underline-offset-4 transition-colors hover:text-[#D72323]">
+                            {open.link.replace(/^https?:\/\//, "").replace(/\/$/, "")} <ArrowUpRight size={13} />
+                          </a>
+                        )}
                       </div>
                     </motion.div>
                   </div>
