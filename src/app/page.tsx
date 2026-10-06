@@ -42,6 +42,8 @@ type WorkItem = {
   gallery: string[];
   objetivo?: string;
   listFeatures?: boolean;
+  featuresLabel?: string;
+  highlight?: { label: string; body: string };
   imgFit?: "cover" | "contain";
 };
 
@@ -70,16 +72,19 @@ const works: (WorkItem & { span: string; height: string })[] = [
     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=60",
     short: "Análise de dados do mercado financeiro.",
     tags: "#Finanças #DataScience",
-    details: "Aplicativo que organiza investimentos em carteira, registra compras e vendas e testa estratégias com 5 anos de dados reais da B3. O coração do projeto é um pipeline que consome dados reais do mercado, trata tudo com Python e carrega num banco relacional. Com essa base, 14 estratégias foram testadas contra a história: a melhor rendeu 197% em 5 anos, contra 50% do IBOV no mesmo período. O resultado foi tão forte que o projeto foi selecionado pelo SEBRAE para a Jornada Startup, com apresentações e mentorias rumo a virar empresa de verdade.",
-    tools: ["Ionic", "Vue.js", "Node.js", "Supabase", "Python"], link: "https://growguru.netlify.app/",
+    details: "GrowGuru é um aplicativo de análise de dados do mercado financeiro que organiza a carteira, registra compras e vendas e testa estratégias com 5 anos de dados reais da B3. O projeto vai além da análise de dados em Python: ele tem integrado machine learning, redes neurais e IA que trabalham sobre a mesma base para encontrar padrões, filtrar ruído e apoiar a decisão de investimento. O coração é um pipeline ETL que consome dados reais da bolsa, trata tudo com Pandas e NumPy e carrega num banco relacional, alimentando backtest, ranking de ativos e o agente de IA. Com essa base, 14 estratégias foram comparadas contra a história: a melhor rendeu 197% em 5 anos, contra 50% do IBOV no mesmo período. O app fica no navegador e no celular, mostrando carteira, rentabilidade por ativo e a leitura das notícias em linguagem simples.",
+    tools: ["Ionic", "Vue.js", "Node.js", "Supabase", "Python", "Pandas", "Groq", "LLMs"], link: "https://growguru.netlify.app/",
     repo: "https://github.com/leandro-25/GROWGURU",
-    objetivo: "Provar que decisão de investimento pode nascer de dados, não de palpite: traduzir o mercado em estratégia que qualquer pessoa entende e levar essa inteligência para o bolso de quem investe.",
+    objetivo: "Provar que decisão de investimento pode nascer de dados, não de palpite: traduzir o mercado em estratégias que qualquer pessoa entende e levar essa inteligência para o bolso de quem investe. Para isso, o projeto responde a três perguntas que todo investidor tem — onde estou, como estou performando e qual estratégia funciona de verdade. O caminho vai do dado bruto da B3 até a tela da pessoa: pipeline ETL em Python, análise com machine learning e redes neurais, backtest das estratégias e, por fim, a carteira comparada com o índice. O desfecho desejado é que qualquer um consiga testar uma estratégia antes de colocar dinheiro em jogo, em vez de decidir na intuição.",
     layout: "narrativa",
     what: "Um guia de investimentos no bolso: você registra compras e vendas, organiza ativos por estratégia e acompanha a rentabilidade da carteira sem planilha complicada.",
-    does: ["Carteira completa separada por estratégias de investimento", "Registro de compras e vendas com histórico", "Rentabilidade acompanhada ativo por ativo", "Backtest: 14 estratégias testadas com 5 anos de dados reais da B3", "Simulação com 412 ativos reais do mercado brasileiro"],
+    does: ["Carteira — ativos separados por estratégia de investimento", "Operações — registro de compras e vendas com histórico completo", "Rentabilidade — desempenho acompanhado ativo por ativo", "Backtest — 14 estratégias testadas com 5 anos de dados reais da B3", "Simulação — 412 ativos reais do mercado brasileiro", "IA na análise — machine learning, redes neurais e agente de IA sobre a mesma base de dados"],
+    featuresLabel: "O que o GrowGuru faz",
+    highlight: { label: "☑ Selecionado pelo SEBRAE", body: "O GrowGuru foi selecionado para a Jornada Startup do SEBRAE, um percurso com apresentações, mentorias e validação de negócio rumo a virar empresa de verdade — a prova de que a análise feita aqui convenceu quem investe em gente." },
     why: "Porque investir sem dados é aposta. O GrowGuru prova com números que estratégia testada supera intuição, e traduz o mercado para uma linguagem que qualquer pessoa entende.",
     kpis: [{ value: "412", label: "ativos da B3 analisados" }, { value: "+197%", label: "melhor estratégia em 5 anos" }, { value: "14", label: "estratégias testadas" }],
     gallery: ["https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&q=60", "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=60"],
+    listFeatures: true,
     span: "col-span-4", height: "h-[200px]",
   },
   {
@@ -418,7 +423,7 @@ export default function Home() {
 
                     {open.does.length > 0 && (
                       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.9, ease: [0.16, 1, 0.3, 1] }} className="mt-8">
-                        <SectionLabel delay={1.1}>☑ Funcionalidades</SectionLabel>
+                        <SectionLabel delay={1.1}>☑ {open.featuresLabel ?? "Funcionalidades"}</SectionLabel>
                         {open.listFeatures ? (
                           <ul className="mt-5 space-y-3.5 text-left">
                             {open.does.map((d) => {
@@ -453,6 +458,16 @@ export default function Home() {
                         ))}
                       </div>
                     </motion.div>
+
+                    {open.highlight && (
+                      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 1.15, ease: [0.16, 1, 0.3, 1] }} className="mt-8">
+                        <SectionLabel delay={1.3}>{open.highlight.label}</SectionLabel>
+                        <div className="mt-5 flex gap-4 rounded-[10px] border border-[#D72323]/25 bg-white p-5 shadow-[4px_4px_0_rgba(215,35,35,0.12)]">
+                          <span className="mt-0.5 text-[#D72323]"><Trophy size={20} /></span>
+                          <p className="text-[16px] font-medium leading-[1.85] text-[#303841]/85">{open.highlight.body}</p>
+                        </div>
+                      </motion.div>
+                    )}
 
                     <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 1.3, ease: [0.16, 1, 0.3, 1] }} className="mt-9">
                       <SectionLabel delay={1.4}>☑ Link do projeto</SectionLabel>
