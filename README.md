@@ -4,7 +4,7 @@ Site pessoal e portfólio de projetos de um Analista de Dados & Engenheiro de Da
 
 ## 📸 Demonstração
 
-**Ao vivo:** [https://leandro-25.github.io/Portifolio/](https://leandro-25.github.io/Portifolio/)
+**Ao vivo:** [https://leandromarianojr.netlify.app/](https://leandromarianojr.netlify.app/)
 
 - Hero com título em contorno e animação de entrada
 - Seção "Sobre Mim" com trajetória e reconhecimentos (SEBRAE, CompassUOL, FATEC)
@@ -122,7 +122,7 @@ Há três caminhos prontos:
 
 1. **GitHub Pages (automático)** — workflow [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml), disparado manualmente (`workflow_dispatch`). Define o `NEXT_BASE_PATH` sozinho, publica a pasta `out/`.
 2. **GitHub Pages (manual)** — `./deploy-pages.ps1`, que builda, cria o `.nojekyll` e faz push da pasta `out/` para a branch `gh-pages`.
-3. **Netlify** — [`netlify.toml`](./netlify.toml) já aponta `npm run build` e publish `out/`.
+3. **Netlify (hospedagem atual)** — [`netlify.toml`](./netlify.toml) já aponta `npm run build` e publish `out/`. Site publicado em [leandromarianojr.netlify.app](https://leandromarianojr.netlify.app/).
 
 A saída é sempre estática: qualquer host que sirva arquivos (Vercel, GitHub Pages, Netlify, S3) funciona.
 
@@ -150,4 +150,4 @@ Siga o padrão do ESLint (`npm run lint`) e mantenha o estilo existente.
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT — sinta-se livre para usá-lo, desde que mantenha os créditos.
+Este projeto está sob a licença [MIT](./LICENSE) — sinta-se livre para usá-lo, desde que mantenha os créditos.
