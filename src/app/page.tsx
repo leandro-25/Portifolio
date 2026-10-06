@@ -183,11 +183,12 @@ const works: (WorkItem & { span: string; height: string })[] = [
     objetivo: "Acabar com a peregrinação manual por vagas: um radar que monitora, filtra e ainda diz o quanto cada vaga combina com você, para candidatar-se onde a chance é real.",
     layout: "jornada",
     what: "Cadastre cargos e locais, ajuste os filtros, aperte iniciar e veja as vagas surgindo ao vivo. Envie seu currículo e receba a nota de aderência de cada uma, com o que conta a favor e contra.",
-    does: ["Busca ao vivo via streaming: vagas aparecem uma a uma sem recarregar", "Todas as combinações de cargo e local varridas com progresso visível", "Filtros de ruído: termos excluídos, período, vagas por combinação e filtro inteligente de local", "Filtro positivo que só mantém títulos relacionados ao cargo buscado", "Descrição completa extraída logo após o card aparecer", "Nota de aderência CV contra vaga com tem, falta e motivo via IA", "Nota mínima que esconde vagas fracas sozinha", "Ordenação, busca, copiar link e descartar direto no card"],
+    does: ["Streaming ao vivo — as vagas surgem uma a uma na tela, sem recarregar a página", "Varredura completa — todas as combinações de cargo e local varridas com barra de progresso", "Filtros de ruído — termos excluídos, período, vagas por combinação e local inteligente", "Filtro positivo — mantém só os títulos relacionados ao cargo buscado", "Descrição completa — extraída assim que o card aparece", "Nota de aderência — CV contra vaga de 0 a 100, com o que tem, o que falta e o motivo, via IA", "Nota mínima — esconde sozinha as vagas fracas", "Ações no card — ordenar, buscar, copiar link e descartar"],
     why: "Porque procurar emprego dói: é repetitivo, barulhento e cego. Automatizar a parte chata e usar IA onde importa, no match, devolve tempo e mira para quem procura.",
     kpis: [{ value: "0-100", label: "nota de aderência por vaga" }, { value: "live", label: "vagas surgindo ao vivo" }, { value: "1", label: "PDF de currículo resolve" }],
     gallery: [],
     imgFit: "contain",
+    listFeatures: true,
     span: "col-span-4", height: "h-[200px]",
   },
   {
